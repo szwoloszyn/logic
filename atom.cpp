@@ -48,7 +48,7 @@ Atom Atom::operator/(Atom a) const
     return Atom(false);
 }
 
-Atom Atom::operator-() const
+Atom Atom::operator~() const
 {
     if(this->value) {
         return Atom(false);

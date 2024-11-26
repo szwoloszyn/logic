@@ -1,4 +1,5 @@
 #include "formula.h"
+#include "functions.h"
 #include <cmath>
 #include <string>
 Formula::Formula(int size)

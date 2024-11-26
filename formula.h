@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "atom.h"
-#include "functions.h"
+
 
 class Formula
 {

@@ -3,46 +3,18 @@
 #include <vector>
 
 #include "formula.h"
-
+#include "functions.h"
 
 using namespace std;
-
+// ZMIENIC ILOSC ZMIENNYCH LOGICZNYCH:
 constexpr int ILE = 3;
 
-Atom myExpr(std::vector<Atom> v)
+Atom myExpr(Formula v)
 {
     Atom ans;
     ans = true; //TU WYRAZENIE LOGICZNE np takie:
-    ans = (v[0] AND v[1]) implies v[2];
+    ans = (~v[0] and v[1]) > v[2];
     return ans;
-}
-
-void print(std::vector<Atom> v)
-{
-    for( auto &x : v) {
-        std::cout << x.get_value() << " ";
-    }
-}
-void print_all_options(int quantity)
-{
-    std::vector < Atom > v(quantity);
-    std::vector < bool > curr(quantity);
-    for( auto i = 0; i < quantity; ++i) {
-        curr[i] = true;
-        v[i] = curr[i];
-    }
-    curr[0] = false;
-    do {
-        for(auto i = 0; i < v.size(); ++i) {
-            v[i] = curr[i];
-        }
-        Atom answer;
-        answer = myExpr(v);
-        std::cout << "dla danych: "; print(v);
-        if(answer.get_value()) std::cout <<  "\nTRUE\n";
-        else std::cout << "\nFALSE\n";
-
-    }while(std::next_permutation( curr.begin(), curr.end()));
 }
 
 
@@ -50,17 +22,20 @@ int main()
 {
     Atom p{0};
     Atom q{1};
-    auto ans = -p implies q;
+    auto ans = ~p implies q;
     //cout << "answer is: " << ans.get_value() << '\n';
     //print_all_options(ILE);
     Formula a{3};
     while (!a.isLast()) {
-        a.print_vals();
+        //a.print_vals();
         a.next();
     }
 
     a.next();
-    a.print_vals();
+    //a.print_vals();
+
+    check_all_options(ILE);
+
     unsigned long long num = 10110100000;
     //cout << decToBin(binToDec(num) );
 }

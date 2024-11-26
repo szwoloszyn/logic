@@ -5,7 +5,7 @@
 #define OR ||
 #define implies >
 #define eq /
-#define NOT -
+#define NOT ~
 class Atom
 {
     bool value;
@@ -15,7 +15,7 @@ public:
     Atom operator||(Atom a) const; // operator koniunkcji
     Atom operator>(Atom a) const; // operator alternatywy
     Atom operator/(Atom a) const; // operator alternatywy
-    Atom operator-() const; // operator negacji
+    Atom operator~() const; // operator negacji
 
     void operator=(bool val); // operator przypisania wartosci do wartosci
     bool get_value() const;
