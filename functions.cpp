@@ -1,9 +1,9 @@
 #include "functions.h"
 #include <cmath>
 #include <iostream>
+
 int binToDec(unsigned long long bin)
 {
-    std::cout << bin << "\n";
     unsigned long long dec = 0;
     int count = 0;
     while(bin != 0) {

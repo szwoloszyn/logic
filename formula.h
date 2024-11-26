@@ -13,6 +13,8 @@ public:
     Formula(int size);
     bool isLast() const;
     void next();
+    void print_vals() const;
+    Atom operator[](int which) const;
 };
 
 #endif // FORMULA_H

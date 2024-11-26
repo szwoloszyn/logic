@@ -53,8 +53,14 @@ int main()
     auto ans = -p implies q;
     //cout << "answer is: " << ans.get_value() << '\n';
     //print_all_options(ILE);
-    Formula a{5};
-    //a.next();
+    Formula a{3};
+    while (!a.isLast()) {
+        a.print_vals();
+        a.next();
+    }
+
+    a.next();
+    a.print_vals();
     unsigned long long num = 10110100000;
-    cout << decToBin(binToDec(num) );
+    //cout << decToBin(binToDec(num) );
 }

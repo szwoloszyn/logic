@@ -22,13 +22,13 @@ bool Formula::isLast() const
 void Formula::next()
 {
     // TESTOWE DANE:
-    vals[1] = true;
-    vals[vals.size()-1] = true;
+        //vals[1] = true;
+        //vals[vals.size()-1] = true;
     // -------
     if(this->isLast()) {
         return;
     }
-    // myvect -> wektor wartosci logicznych mojego vals
+    // myvect -> logic values of vals vector
     std::vector<int> myvect(vals.size());
     for(auto i=0; i<vals.size(); ++i) {
         if(this->vals[i].get_value()) {
@@ -39,11 +39,15 @@ void Formula::next()
         }
     }
     // converting vector values to binary number - to easily get combinations
-    int bin = 0;
+    auto bin = 0uLL;
     for(auto i=0; i<myvect.size(); ++i) {
         bin += myvect[i]*(std::pow(10,i));
     }
-    // TODO add bin += 1 in binary !
+    // adding bin += 1 in binary by converting to decimal adding and reconverting to binary
+    auto dec = binToDec(bin);
+    dec ++;
+    bin = decToBin(dec);
+    // zeroing myvect (could do without it ig)
     for(auto &x : myvect) {
         x = 0;
     }
@@ -51,8 +55,24 @@ void Formula::next()
         myvect[i] = bin%2;
         bin /= 10;
     }
-    for(auto &x : myvect) {
-        std::cout << x << " ";
+    for(auto i=0; i<vals.size(); ++i) {
+        vals[i] = bool(myvect[i]);
     }
-    //std::cout << bin << '\n';
+}
+
+void Formula::print_vals() const
+{
+    for(auto &x : vals) {
+        std::cout << x.get_value() << " ";
+    }
+    std::cout << '\n';
+}
+
+Atom Formula::operator[](int which) const
+{
+    if(which >= vals.size()) {
+        std::cerr << "invalid index, returning [0]";
+        return vals[0];
+    }
+    return vals[which];
 }
