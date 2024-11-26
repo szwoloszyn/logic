@@ -1,25 +1,18 @@
 #ifndef FORMULA_H
 #define FORMULA_H
+#include <iostream>
+#include <vector>
+#include "atom.h"
+#include "functions.h"
 
-#define AND &&
-#define OR ||
-#define implies >
-#define eq /
-#define NOT -
 class Formula
 {
-    bool value;
+    std::vector < Atom > vals{};
+
 public:
-    Formula(bool a = false);
-    Formula operator&&(Formula a) const; // operator alternatywy
-    Formula operator||(Formula a) const; // operator koniunkcji
-    Formula operator>(Formula a) const; // operator alternatywy
-    Formula operator/(Formula a) const; // operator alternatywy
-    Formula operator-() const; // operator negacji
-
-    void operator=(bool val); // operator przypisania wartosci do wartosci
-    bool get_value() const;
-
+    Formula(int size);
+    bool isLast() const;
+    void next();
 };
 
 #endif // FORMULA_H
