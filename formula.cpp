@@ -7,7 +7,7 @@ Formula::Formula(int size)
     for(auto i=0; i<size; ++i) {
         this->vals.push_back(Atom(false));
     }
-
+    this->outputs = check_all_options(size, *this);
 }
 
 bool Formula::isLast() const
@@ -61,6 +61,13 @@ void Formula::next()
     }
 }
 
+void Formula::zeroit()
+{
+    for(auto &x : vals) {
+        x = false;
+    }
+}
+
 void Formula::print_vals() const
 {
     for(auto &x : vals) {
@@ -76,4 +83,48 @@ Atom Formula::operator[](int which) const
         return vals[0];
     }
     return vals[which];
+}
+
+bool Formula::isTautology() const
+{
+    for(auto x : outputs) {
+        if(!x) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Formula::isPossible() const
+{
+    for(auto x : outputs) {
+        if(x) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Formula::isFake() const
+{
+    for(auto x : outputs) {
+        if(x) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void Formula::printInfo() const
+{
+    std::cout << "\n-------\n";
+    if(isTautology()) {
+        std::cout << "formula is tautology\n";
+    }
+    else if(isPossible()) {
+        std::cout << "formula is possible\n";
+    }
+    else {
+        std::cout << "formula is fake\n";
+    }
 }

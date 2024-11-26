@@ -35,18 +35,21 @@ int decToBin(unsigned long long dec)
     return bin;
 }
 
-void check_all_options(int quantity)
+std::vector<bool> check_all_options(int quantity, Formula &v)
 {
-    Formula v{quantity};
     Atom answer;
-
+    std::vector<bool> out{};
     while(!v.isLast()) {
         answer = myExpr(v);
+        out.push_back(answer.get_value());
         print_output(answer, v);
         v.next();
     }
     answer = myExpr(v);
+    out.push_back(answer.get_value());
     print_output(answer, v);
+    v.zeroit();
+    return out;
 }
 
 void print_output(Atom answer, Formula v)
@@ -61,4 +64,3 @@ void print_output(Atom answer, Formula v)
         std::cout << "FALSE\n";
     }
 }
-
